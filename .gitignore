@@ -1,0 +1,36 @@
+# Ignorar entornos virtuales
+venv/
+env/
+*.pyc
+__pycache__/
+
+# Ignorar archivos de configuración de Streamlit
+.streamlit/
+
+# Ignorar dependencias instaladas
+*.egg-info/
+*.eggs/
+.Python
+build/
+dist/
+pip-wheel-metadata/
+
+# Ignorar archivos de logs y caché
+*.log
+*.cache/
+.cache/
+
+# Ignorar archivos creados por el sistema operativo
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de Jupyter y otras salidas
+*.ipynb_checkpoints/
+
+# Ignorar archivos generados por IDEs
+.vscode/
+.idea/
+*.iml
+
+# Ignorar archivos temporales del editor
+*~
