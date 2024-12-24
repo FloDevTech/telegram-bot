@@ -2,6 +2,10 @@ import requests
 import logging
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+import os
+import whisper
+
+#https://medium.com/@genaromateu/c%C3%B3mo-transcribir-un-audio-a-texto-en-python-con-los-servicios-de-azure-ff5af578f7f4
 
 # Enable logging
 logging.basicConfig(
@@ -53,13 +57,10 @@ async def echo_all(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     payload = dict(key1=update.message.voice.file_id, key2='value2')
     file_id = update.message.voice.file_id
     new_file =await update.message.effective_attachment.get_file()
-    await new_file.download_to_drive('file_name.wav')
+    await new_file.download_to_drive('file_name.mp3')
     print(payload)
-    # downloaded_file = update.message.audio
-    # with open('user_voice.mp3', 'wb') as new_file:
-    #     new_file.write(downloaded_file)
-    # development
-    files = {'upload_file': open('file_name.wav','rb')}
+    
+    files = {'upload_file': open('file_name.mp3','rb')}
     r = requests.post("http://localhost:5678/webhook-test/c5c1757f-bffd-41ed-8af9-72d8aec5409b",files=files)
 
 

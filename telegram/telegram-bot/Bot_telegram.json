@@ -1,0 +1,241 @@
+{
+  "name": "Bot telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "c5c1757f-bffd-41ed-8af9-72d8aec5409b",
+        "options": {
+          "rawBody": true,
+          "responseData": ""
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -420,
+        -100
+      ],
+      "id": "da241913-60c6-48b6-a6ce-2cc9859f961e",
+      "name": "Webhook",
+      "webhookId": "c5c1757f-bffd-41ed-8af9-72d8aec5409b"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -20
+      ],
+      "id": "1f9b0038-c4e9-4307-9ce9-1a59ad367a79",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "chatId": "-4221534488",
+        "text": "={{ $json.data.key1 }}/{{ $json.data.key2 }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1060,
+        -100
+      ],
+      "id": "e3c1fafe-2814-458a-afdf-32f228fbe364",
+      "name": "Telegram",
+      "credentials": {
+        "telegramApi": {
+          "id": "WFAPHFLMP42s7HVb",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.data }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        700,
+        -100
+      ],
+      "id": "c698ee43-98a2-4c4f-87c8-23e5fedf3f1e",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.headers['content-type'] }}",
+                    "rightValue": "multipart/form-data; ",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6f3254c5-5f4b-4060-ab6b-d08e70b26243",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -180,
+        -100
+      ],
+      "id": "27b73d61-355c-4bce-9925-f70bf7406f23",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "C:\\00_programacion",
+        "dataPropertyName": "={{ $json.body.upload_file }}",
+        "options": {
+          "append": true
+        }
+      },
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [
+        140,
+        -240
+      ],
+      "id": "82e9f608-1339-4637-bd2c-6f894febe448",
+      "name": "Read/Write Files from Disk"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Read/Write Files from Disk",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2924928c-12f3-4e6f-a7b8-750b2ec23405",
+  "meta": {
+    "instanceId": "1bafc1dcd688461a2dd3ad636aacde448b238125f637eecdba70ba325f5bdd76"
+  },
+  "id": "WPj8qO6PcAmaJkFg",
+  "tags": []
+}
