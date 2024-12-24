@@ -1,0 +1,13 @@
+https://api.telegram.org/bot7617555339:AAFF-A4XqpNGIEY_WcfrIX6hJibxdah_Jak/getWebhookInfo
+
+https://api.telegram.org/bot7617555339:AAFF-A4XqpNGIEY_WcfrIX6hJibxdah_Jak/getWebhookInfo
+https://api.telegram.org/bot7617555339:AAFF-A4XqpNGIEY_WcfrIX6hJibxdah_Jak/setWebhook?url=https://yzvmi4v9gieeykolh030nmxr.hooks.n8n.cloud/webhook-test/9ff69b69-4eb2-47c7-8147-2c627557d854/webhook
+Then trying get webhook info
+https://api.telegram.org/bot7031*******rA2JdEx0/getWebhookInfo
+
+{"ok":true,"result":{"url":"https://n8n.***.com/webhook-test/11b3bf*******1b1/webhook","has_custom_certificate":false,"pending_update_count":10,"last_error_date":1722289047,"last_error_message":"Wrong response from the webhook: 403 Forbidden","max_connections":40,"ip_address":"1**.***.227.***"","allowed_updates":["message"]}}
+
+
+https://api.telegram.org/bot7617555339:AAFF-A4XqpNGIEY_WcfrIX6hJibxdah_Jak/getUpdates
+
+https://yzvmi4v9gieeykolh030nmxr.hooks.n8n.cloud/
